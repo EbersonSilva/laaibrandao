@@ -914,7 +914,8 @@ footer {
 
 /* --- ELEMENTOS COLAPSÁVEIS E MOBILE (DESKTOP DEFAULTS) --- */
 .program-list-extra {
-  display: contents; /* Faz com que os itens internos se comportem como filhos diretos do container flex */
+  display: contents;
+  /* Faz com que os itens internos se comportem como filhos diretos do container flex */
 }
 
 .bio-extra {
@@ -1118,15 +1119,60 @@ footer {
   .sticky-cta-mobile {
     position: fixed;
     bottom: 20px;
-    left: 20px;
     right: 20px;
     z-index: 999;
     display: none;
   }
 
   .sticky-cta-mobile.visible {
-    display: block;
+    display: flex;
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .whatsapp-btn-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4), 0 0 0 0px rgba(37, 211, 102, 0.4);
+    color: #ffffff;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    animation: pulseWhatsapp 2s infinite;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 9999;
+  }
+
+  .whatsapp-btn-float:hover {
+    background-color: #20ba59;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+  }
+
+  .whatsapp-btn-float svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+  }
+
+  /* Pulsação da animação */
+  @keyframes pulseWhatsapp {
+    0% {
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4), 0 0 0 0px rgba(37, 211, 102, 0.4);
+    }
+
+    70% {
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2), 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4), 0 0 0 0px rgba(37, 211, 102, 0);
+    }
   }
 
   @keyframes slideUp {
@@ -1134,6 +1180,7 @@ footer {
       transform: translateY(100px);
       opacity: 0;
     }
+
     to {
       transform: translateY(0);
       opacity: 1;
@@ -1173,6 +1220,8 @@ footer {
   .logo-img {
     height: 30px;
   }
+
+
 
   .hero-title {
     font-size: 2.2rem;
