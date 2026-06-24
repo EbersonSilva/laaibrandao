@@ -84,4 +84,142 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => {
     revealObserver.observe(el);
   });
+
+  // --- PROGRAM ACCORDION ---
+  const toggleProgramBtn = document.getElementById('toggle-program-btn');
+  const programExtraContainer = document.querySelector('.program-list-extra');
+  
+  if (toggleProgramBtn && programExtraContainer) {
+    toggleProgramBtn.addEventListener('click', () => {
+      const isExpanded = toggleProgramBtn.classList.contains('active');
+      const textSpan = toggleProgramBtn.querySelector('.btn-text') || toggleProgramBtn;
+      
+      if (isExpanded) {
+        // Collapse
+        toggleProgramBtn.classList.remove('active');
+        textSpan.innerHTML = 'Ver Cronograma Completo';
+        
+        programExtraContainer.style.maxHeight = programExtraContainer.scrollHeight + 'px';
+        // Force reflow
+        programExtraContainer.offsetHeight;
+        
+        programExtraContainer.style.maxHeight = '0px';
+        programExtraContainer.style.opacity = '0';
+        
+        const onTransitionEnd = (e) => {
+          if (e.propertyName === 'max-height') {
+            programExtraContainer.style.display = 'none';
+            programExtraContainer.removeEventListener('transitionend', onTransitionEnd);
+          }
+        };
+        programExtraContainer.addEventListener('transitionend', onTransitionEnd);
+      } else {
+        // Expand
+        toggleProgramBtn.classList.add('active');
+        textSpan.innerHTML = 'Ocultar Cronograma';
+        
+        programExtraContainer.style.display = 'flex';
+        // Force reflow
+        programExtraContainer.offsetHeight;
+        
+        programExtraContainer.style.maxHeight = programExtraContainer.scrollHeight + 'px';
+        programExtraContainer.style.opacity = '1';
+      }
+    });
+  }
+
+  // --- BIO ACCORDION ---
+  const toggleBioBtn = document.getElementById('toggle-bio-btn');
+  const bioExtraContainer = document.querySelector('.bio-extra');
+  
+  if (toggleBioBtn && bioExtraContainer) {
+    toggleBioBtn.addEventListener('click', () => {
+      const isExpanded = toggleBioBtn.classList.contains('active');
+      const textSpan = toggleBioBtn.querySelector('.btn-text') || toggleBioBtn;
+      
+      if (isExpanded) {
+        // Collapse
+        toggleBioBtn.classList.remove('active');
+        textSpan.innerHTML = 'Ler biografia completa';
+        
+        bioExtraContainer.style.maxHeight = bioExtraContainer.scrollHeight + 'px';
+        // Force reflow
+        bioExtraContainer.offsetHeight;
+        
+        bioExtraContainer.style.maxHeight = '0px';
+        bioExtraContainer.style.opacity = '0';
+        
+        const onTransitionEnd = (e) => {
+          if (e.propertyName === 'max-height') {
+            bioExtraContainer.style.display = 'none';
+            bioExtraContainer.removeEventListener('transitionend', onTransitionEnd);
+          }
+        };
+        bioExtraContainer.addEventListener('transitionend', onTransitionEnd);
+      } else {
+        // Expand
+        toggleBioBtn.classList.add('active');
+        textSpan.innerHTML = 'Ler menos';
+        
+        bioExtraContainer.style.display = 'block';
+        // Force reflow
+        bioExtraContainer.offsetHeight;
+        
+        bioExtraContainer.style.maxHeight = bioExtraContainer.scrollHeight + 'px';
+        bioExtraContainer.style.opacity = '1';
+      }
+    });
+  }
+
+  // --- MOBILE STICKY CTA ---
+  const stickyCta = document.getElementById('mobile-sticky-cta');
+  const heroSection = document.querySelector('.hero-section');
+  
+  if (stickyCta && heroSection) {
+    const handleScroll = () => {
+      if (window.innerWidth <= 768) {
+        const heroHeight = heroSection.offsetHeight;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition > heroHeight - 100) {
+          stickyCta.classList.add('visible');
+        } else {
+          stickyCta.classList.remove('visible');
+        }
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    // Initial check
+    handleScroll();
+  }
+
+  // Reset collapsible elements when resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      if (programExtraContainer) {
+        programExtraContainer.style.display = '';
+        programExtraContainer.style.maxHeight = '';
+        programExtraContainer.style.opacity = '';
+      }
+      if (toggleProgramBtn) {
+        toggleProgramBtn.classList.remove('active');
+        const textSpan = toggleProgramBtn.querySelector('.btn-text') || toggleProgramBtn;
+        textSpan.innerHTML = 'Ver Cronograma Completo';
+      }
+      if (bioExtraContainer) {
+        bioExtraContainer.style.display = '';
+        bioExtraContainer.style.maxHeight = '';
+        bioExtraContainer.style.opacity = '';
+      }
+      if (toggleBioBtn) {
+        toggleBioBtn.classList.remove('active');
+        const textSpan = toggleBioBtn.querySelector('.btn-text') || toggleBioBtn;
+        textSpan.innerHTML = 'Ler biografia completa';
+      }
+    }
+  });
 });

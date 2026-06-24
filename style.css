@@ -911,6 +911,22 @@ footer {
   color: var(--accent-gold);
 }
 
+
+/* --- ELEMENTOS COLAPSÁVEIS E MOBILE (DESKTOP DEFAULTS) --- */
+.program-list-extra {
+  display: contents; /* Faz com que os itens internos se comportem como filhos diretos do container flex */
+}
+
+.bio-extra {
+  display: block;
+}
+
+.btn-ver-cronograma,
+.btn-ler-bio,
+.sticky-cta-mobile {
+  display: none;
+}
+
 /* --- RESPONSIVIDADE (MEDIA QUERIES) --- */
 
 @media (max-width: 1024px) {
@@ -975,12 +991,153 @@ footer {
     font-size: 2.8rem;
   }
 
-  .pains-grid {
-    grid-template-columns: 1fr;
+  .pains-grid,
+  .experience-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pains-grid::-webkit-scrollbar,
+  .experience-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pains-grid .pain-card,
+  .experience-grid .experience-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
   }
 
   .pain-card {
     padding: 2rem;
+  }
+
+  /* Accordion Cronograma no Mobile */
+  .program-list-extra {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  }
+
+  .btn-ver-cronograma {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 1rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+  }
+
+  .btn-ver-cronograma:hover {
+    background: rgba(229, 185, 95, 0.1);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-ver-cronograma .chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-ver-cronograma.active .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Biografia no Mobile */
+  .bio-extra {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  }
+
+  .bio-extra p {
+    margin-top: 1rem;
+  }
+
+  .btn-ler-bio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--accent-gold);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-gold);
+    background: var(--glass-bg);
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition-smooth);
+  }
+
+  .btn-ler-bio:hover {
+    background: rgba(229, 185, 95, 0.1);
+  }
+
+  .btn-ler-bio .chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-ler-bio.active .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Sticky CTA Mobile */
+  .sticky-cta-mobile {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 999;
+    display: none;
+  }
+
+  .sticky-cta-mobile.visible {
+    display: block;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
   .pricing-grid {
@@ -1022,10 +1179,6 @@ footer {
   }
 
   .method-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .experience-grid {
     grid-template-columns: 1fr;
   }
 
