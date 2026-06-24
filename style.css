@@ -479,30 +479,12 @@ header {
 }
 
 .program-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.program-visual-box {
-  position: relative;
-  height: 480px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border-gold);
-  box-shadow: var(--shadow-premium);
-}
-
-.program-visual-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
 }
 
 .program-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -968,17 +950,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .program-wrapper {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
 
-  .program-visual-box {
-    max-width: 500px;
-    height: 380px;
-    margin: 0 auto;
-    order: 2;
-  }
 
   .experience-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1027,6 +999,10 @@ footer {
 
   .pain-card {
     padding: 2rem;
+  }
+
+  .program-list {
+    grid-template-columns: 1fr;
   }
 
   /* Accordion Cronograma no Mobile */
