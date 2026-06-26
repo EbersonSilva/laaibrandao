@@ -222,4 +222,61 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // --- GOOGLE ANALYTICS CONVERSION TRACKING (WHATSAPP CLICKS) ---
+  const trackWhatsAppClick = (buttonId, planName) => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'click_whatsapp', {
+        'event_category': 'Conversion',
+        'event_label': planName,
+        'button_id': buttonId
+      });
+      console.log(`GA Event: click_whatsapp for ${planName} (${buttonId})`);
+    }
+  };
+
+  const whatsappButtons = [
+    { id: 'cta-vip', label: 'Plano VIP' },
+    { id: 'cta-dupla', label: 'Plano em Dupla' },
+    { id: 'mobile-sticky-cta-btn', label: 'Sticky Mobile' },
+    { id: 'footer-whatsapp', label: 'WhatsApp Rodapé' }
+  ];
+
+  whatsappButtons.forEach(btnInfo => {
+    const btn = document.getElementById(btnInfo.id);
+    if (btn) {
+      btn.addEventListener('click', () => {
+        trackWhatsAppClick(btnInfo.id, btnInfo.label);
+      });
+    }
+  });
+
+  // --- COOKIE CONSENT BANNER LOGIC (LGPD) ---
+  const cookieBanner = document.getElementById('cookie-consent-banner');
+  const cookieAcceptBtn = document.getElementById('cookie-btn-accept');
+  const cookieDeclineBtn = document.getElementById('cookie-btn-decline');
+
+  if (cookieBanner && cookieAcceptBtn && cookieDeclineBtn) {
+    const consent = localStorage.getItem('cookieConsent');
+
+    // Exibe o banner se o usuário ainda não tiver tomado uma decisão
+    if (!consent) {
+      setTimeout(() => {
+        cookieBanner.classList.add('show');
+      }, 1500); // 1.5 segundos de delay para um surgimento suave e elegante
+    }
+
+    // Botão Aceitar
+    cookieAcceptBtn.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'accepted');
+      cookieBanner.classList.remove('show');
+    });
+
+    // Botão Recusar
+    cookieDeclineBtn.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'declined');
+      cookieBanner.classList.remove('show');
+    });
+  }
 });
+
