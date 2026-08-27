@@ -251,32 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- COOKIE CONSENT BANNER LOGIC (LGPD) ---
-  const cookieBanner = document.getElementById('cookie-consent-banner');
-  const cookieAcceptBtn = document.getElementById('cookie-btn-accept');
-  const cookieDeclineBtn = document.getElementById('cookie-btn-decline');
 
-  if (cookieBanner && cookieAcceptBtn && cookieDeclineBtn) {
-    const consent = localStorage.getItem('cookieConsent');
-
-    // Exibe o banner se o usuário ainda não tiver tomado uma decisão
-    if (!consent) {
-      setTimeout(() => {
-        cookieBanner.classList.add('show');
-      }, 1500); // 1.5 segundos de delay para um surgimento suave e elegante
-    }
-
-    // Botão Aceitar
-    cookieAcceptBtn.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'accepted');
-      cookieBanner.classList.remove('show');
-    });
-
-    // Botão Recusar
-    cookieDeclineBtn.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'declined');
-      cookieBanner.classList.remove('show');
-    });
-  }
 });
 
