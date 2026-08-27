@@ -236,10 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const whatsappButtons = [
-    { id: 'cta-vip', label: 'Plano VIP' },
-    { id: 'cta-dupla', label: 'Plano em Dupla' },
+    { id: 'cta-vip', label: 'Cronograma Capilar' },
+    { id: 'cta-dupla', label: 'Alisamento Termico' },
     { id: 'mobile-sticky-cta-btn', label: 'Sticky Mobile' },
-    { id: 'footer-whatsapp', label: 'WhatsApp Rodapé' }
+    { id: 'footer-whatsapp', label: 'WhatsApp Rodape' }
   ];
 
   whatsappButtons.forEach(btnInfo => {
