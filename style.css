@@ -959,6 +959,18 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .nav-container {
+    height: 4.8rem;
+  }
+
+  #header-cta {
+    display: none !important;
+  }
+
   .section-padding {
     padding: 6rem 0;
   }
@@ -1199,6 +1211,9 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.15rem;
+  }
 
   .logo-img {
     height: 30px;
