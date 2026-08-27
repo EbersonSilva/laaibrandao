@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- SCROLL REVEAL ANIMATIONS (IntersectionObserver) ---
-  const revealElements = document.querySelectorAll('.pain-card, .method-card, .program-item, .experience-card, .price-card, .connection-box, .booking-alert');
+  const revealElements = document.querySelectorAll('.pain-card, .method-card, .program-item, .experience-card, .price-card, .connection-box, .booking-alert, .gallery-item, .location-detail-item, .location-map');
   
   // Apply initial fade-in styles dynamically via JS to ensure layout is accessible even without JS
   revealElements.forEach(el => {
